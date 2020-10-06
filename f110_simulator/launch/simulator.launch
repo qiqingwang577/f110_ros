@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Launch a map from the maps folder-->
+  <arg name="map" default="$(find f110_simulator)/maps/race_track.yaml"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)"/>
+
+  <!-- Launch the racecar model -->
+  <include file="$(find f110_simulator)/launch/racecar_model.launch"/>
+
+  <!-- Begin the simulator with the parameters from params.yaml -->
+  <node pkg="f110_simulator" name="f110_simulator" type="simulator" output="screen">
+    <rosparam command="load" file="$(find f110_simulator)/params.yaml"/>
+  </node>
+
+  <!-- Launch the Keyboard Node -->
+  <!-- Insert keyboard node declaration here. Have a look at the template below and follow the syntax. -->
+  <node pkg="f110_simulator" name="qiqing_mux" type="qiqing_mux" output="screen"/>
+  <node pkg="f110_simulator" name="qiqing_follow" type="qiqing_follow" output="screen"/>
+  <node pkg="f110_simulator" name="qiqing_keyboard" type="qiqing_keyboard" output="screen"/>
+  <node pkg="f110_simulator" name="qiqing_random" type="qiqing_random" output="screen"/>
+  <node pkg="f110_simulator" name="qiqing_aeb" type="qiqing_aeb" output="screen"/>
+  <node pkg="f110_simulator" name="qiqing_pid" type="qiqing_pid" output="screen"/>
+
+
+  <!--
+<node pkg="f110_simulator" name="qiqing_random" type="qiqing_random" output="screen"/>
+-->
+
+  <!-- Node declaration template -->
+  <!--
+  <node pkg="f110_simulator" name="new node's name" type="new file name" output="screen"/>
+  -->
+
+
+  <!-- Launch RVIZ -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find f110_simulator)/launch/simulator.rviz" output="screen"/>
+</launch>
