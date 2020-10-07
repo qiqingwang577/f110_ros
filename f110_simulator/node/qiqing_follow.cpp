@@ -78,8 +78,7 @@ int main(int argc, char *argv[]) {
   command_pub = n.advertise<ackermann_msgs::AckermannDriveStamped>("/drive_ftg", 1);
 
   while(ros::ok()) {
-    //FAILED!!
-    /*if(distmax_angle <= 0.0){
+    if(distmax_angle <= 0.0){
         angle = -1 * distmax_angle * distmax_angle;
       }
     else{
@@ -90,7 +89,7 @@ int main(int argc, char *argv[]) {
       }
     if(abs(distmin_index - 540) <= 220){
        angle = - 1 * (distmin_index - 540)/abs(distmin_index - 540);
-    }*/
+    }
 
     /*modify angle because of the worst case: small distance and small angle,
     that means a wall in front of car */
